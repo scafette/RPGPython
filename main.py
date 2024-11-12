@@ -1,5 +1,6 @@
 from map.mainmap import boucle_jeu
-from map.assets.player import Player
+from assets.player import Player
+from assets.inv import Inventaire
 import os
 import time
 
@@ -30,7 +31,10 @@ def menu():
 def partie():
     clear_screen()
     nom_joueur = input("Bonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Dites-moi quel est votre nom : ")
-    joueur = Player(nom_joueur)
+    joueur = Player(
+        name=nom_joueur,
+        inventaire=Inventaire()
+    )
     print(f"\n\033[95mEnchanté, {joueur.name}, mon nom à moi est Caîd, je suis le garde de ce Sanctuaire !\033[0m")
     time.sleep(2)
 
@@ -46,10 +50,11 @@ def partie():
                   "flottant au-dessus des Terres Brisées. Pour y parvenir, il faut traverser un chemin escarpé bordé d’étranges statues de pierre, "
                   "chacune marquée de runes anciennes dont la signification a été oubliée par le monde. Autour de la montagne, "
                   "les vents hurlent en permanence, formant une barrière invisible qui repousse quiconque tente de s'approcher sans y être invité.\033[0m")
+            input()
         elif choix == '2':
             print(f"Bonne chance à vous, {joueur.name}, l'aventure commence !")
             time.sleep(1)
-            boucle_jeu(joueur)
+            boucle_jeu()
             break
         elif choix == '3':
             clear_screen()

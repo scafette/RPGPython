@@ -1,5 +1,13 @@
-from map import Player
 import os
+from map.Cmap import carte_cristal, descriptionsC
+from map.Fmap import carte_fosse_ombres, descriptionsF
+from map.Mmap import carte_murmure, descriptionsM
+from map.Jmap import carte_jardin, descriptionsJ
+from map.Pmap import carte_pont_suspendu, descriptionsP
+from map.Tmap import carte_titan, descriptionsT
+from assets.items import items
+
+import time
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -14,7 +22,7 @@ carte = [
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "P", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
-    ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
+    ["#", " ", " ", " ", " ", " ", " ", " ", "M", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "J", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
@@ -30,10 +38,11 @@ descriptions = {
     "J": "\033[32mUn panneau de pierre recouvert de mousse signale : 'Le Jardin des Ruines'.\033[0m",  
     "C": "\033[34mUn symbole lumineux est gravé dans la pierre, indiquant : 'La Chambre du Cristal'.\033[0m", 
     "T": "\033[33mVous trouvez une plaque dorée portant l'inscription : 'La Cour des Titans'.\033[0m",
-    "H": "\033[31mUne ancienne stèle indique : 'La Tour des Hurlements'.\033[0m"  
+    "H": "\033[31mUne ancienne stèle indique : 'La Tour des Hurlements'.\033[0m",
+    "M": "\033[31mUne ancienne stèle indique : 'Haul des Murmures'.\033[0m"
 }
 
-
+spawn_position = [2, 2]
 position_joueur = [2, 2]
 
 def afficher_carte(map):
@@ -42,7 +51,7 @@ def afficher_carte(map):
         ligne_affichee = ""
         for j, lieu in enumerate(ligne):
             if [i, j] == position_joueur:
-                ligne_affichee += "⚔️  "
+                ligne_affichee += "⚔️ "
             else:
                 ligne_affichee += lieu + " "
         print(ligne_affichee)
@@ -69,25 +78,94 @@ def est_deplacement_valide(nouvelle_position):
     x, y = nouvelle_position
     return 0 <= x < len(carte) and 0 <= y < len(carte[0]) and carte[x][y] != "#"
 
-def description_lieu():
-
+def description_lieu(map):
+    global carte_actuelle, position_joueur
     x, y =  position_joueur
-    lieu = carte[x][y]
-    if lieu in descriptions:
-        print(descriptions[lieu])
-        explorer = input("Voulez-vous explorer ce lieu ? (oui/non) : ").lower()
-        if explorer == "oui":
-            print(f"Vous explorez {[lieu]}")
-        else:
-            print("Vous rebroussez chemin.")
- 
-def boucle_jeu(joueur):
+    lieu = map[x][y]
+    if map == carte_fosse_ombres :
+        description = descriptionsF
+    elif map == carte_pont_suspendu :
+        description = descriptionsP
+    elif map == carte_jardin :
+        description = descriptionsJ
+    elif map == carte_cristal :
+        description = descriptionsC
+    elif map == carte_titan :
+        description = descriptionsT
+    elif map == carte_murmure :
+        description = descriptionsM
+    # elif map == carte_hurlements :
+    #     description = descriptionsH
+    else :
+        description = descriptions
+        
+    if lieu in description:
+        print(description[lieu])
+        if description == descriptions :
+            explorer = input("Voulez-vous explorer ce lieu ? (oui/non) : ").lower()
+            if explorer == "oui":
+                print(f"Vous explorez {[lieu]}")
+                input()
+                if lieu == "F":
+                    carte_actuelle = carte_fosse_ombres
+                    position_joueur = spawn_position
+                    
+                    afficher_carte(carte_fosse_ombres)
+                elif lieu == "P":
+                    carte_actuelle = carte_pont_suspendu
+                    position_joueur = spawn_position
+                    afficher_carte(carte_pont_suspendu)
+                elif lieu == "J":
+                    carte_actuelle = carte_jardin
+                    position_joueur = spawn_position
+                    afficher_carte(carte_jardin)
+                elif lieu == "C":
+                    carte_actuelle = carte_cristal
+                    position_joueur = spawn_position
+                    afficher_carte(carte_cristal)
+                elif lieu == "T":
+                    carte_actuelle = carte_titan
+                    position_joueur = spawn_position
+                    afficher_carte(carte_titan)
+                elif lieu == "M":
+                    carte_actuelle = carte_murmure
+                    position_joueur = spawn_position
+                    afficher_carte(carte_murmure)
+                
+                # elif lieu == "H" :
+                #       carte_actuelle = carte_hurlements
+                #       position_joueur = spawn_position
+                #       afficher_carte(carte_actuelle, carte_hurlements)
+
+                elif lieu == "M" :
+                    carte_actuelle = carte_murmure
+                    position_joueur = spawn_position
+                    afficher_carte(carte_actuelle)
+
+            else :
+                print("Vous rebroussez chemin.")
+        # elif lieu =="🐉" :
+        #     fight(boss,player)
+        #     Player.inventaire.add(searchItems(ladaronneaelias))
+        else : 
+            time.sleep(3)
+            
+             
+def boucle_jeu():
+    global carte_actuelle
+    carte_actuelle = carte
+
     while True:
-        afficher_carte(carte)
-        description_lieu()
+        afficher_carte(carte_actuelle)
+        description_lieu(carte_actuelle)
         commande = input("Entrez une commande (z, q, s, d ou quitter) : ").lower()
         if commande == "quitter":
             print("Quitter le jeu...")
             break
         else:
             deplacer_joueur(commande)
+
+
+def searchItems(item):
+    for item in items:
+        return item
