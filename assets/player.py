@@ -2,11 +2,18 @@
 import random
 
 class Player:
-    def __init__(self, name,inventaire):
+    def __init__(self, name,inventaire ):
         self.name = name
         self.hp = 250   
         self.inventory = inventaire
-
+        hp = 250
+        
+        
+    def is_alive(self):
+        return self.hp > 0
+    def is_dead(self):
+        return self.hp <= 0
+    
     def __str__(self):
         return f"Nom: {self.name}, HP: {self.hp}, Inventaire: {self.inventory}"
 
@@ -35,8 +42,4 @@ Maelthar = Boss(
     hp=500,
     attaque=5,
     defense=10,
-)
-
-SangIgris = Boss(
-    name= "SangIgris",
 )

@@ -20,7 +20,7 @@ def menu():
             partie()
         elif choix == '2':
             print("\nRPG créé par Gio / Elias")
-            print("\033[95mDescription : Monstres : Faucheurs d’Éther, Géants du Typhon, Sœurs des Tempêtes; BOSS : Sang Igris.\033[0m")
+            print("\033[95mDescription : Monstres,  Faucheurs d’Éther, Géants du Typhon, Sœurs des Tempêtes, Maelthar,\033[0m BOSS : Sang Igris.")
             input("Appuyez sur une touche pour continuer...")
         elif choix == '3':
             print("Quitter le jeu...")
@@ -30,13 +30,15 @@ def menu():
 
 def partie():
     clear_screen()
-    nom_joueur = input("Bonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Dites-moi quel est votre nom : ")
+    nom_joueur = input("Bonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Si vous êtes parvenu jusqu'ici c'est que vous souhaitez libérer les ames maudites de ce sanctuaire. " 
+                    "Dites-moi quel est votre nom : ")
     joueur = Player(
         name=nom_joueur,
         inventaire=Inventaire()
+        
     )
-    print(f"\n\033[95mEnchanté, {joueur.name}, mon nom à moi est Caîd, je suis le garde de ce Sanctuaire !\033[0m")
-    time.sleep(2)
+    print(f"\n\033[95mEnchanté, {joueur.name}, je me présente je suis Caîd, le garde de ce Sanctuaire personne ne peut entrer ni sortir sans que je sois au courant!\033[0m")
+    time.sleep(1)
 
     while True:
         clear_screen()
@@ -52,7 +54,8 @@ def partie():
                   "les vents hurlent en permanence, formant une barrière invisible qui repousse quiconque tente de s'approcher sans y être invité.\033[0m")
             input()
         elif choix == '2':
-            print(f"Bonne chance à vous, {joueur.name}, l'aventure commence !")
+            print(f"Bonne chance à vous, {joueur.name}, je vous souhaite toute la réussite et gloire afin de battre tout les horrible créature de ce sanctuaire ... Pitié ma Fille à été maudite et son âme est bloqué , je vous en supplie libérez la. "
+                " Que l'aventure commence !")
             time.sleep(1)
             boucle_jeu()
             break

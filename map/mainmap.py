@@ -5,8 +5,9 @@ from map.Mmap import carte_murmure, descriptionsM
 from map.Jmap import carte_jardin, descriptionsJ
 from map.Pmap import carte_pont_suspendu, descriptionsP
 from map.Tmap import carte_titan, descriptionsT
-from assets.items import items
-
+# from assets.items import items
+from assets.combat import Fight
+from assets.player import Boss, Player
 import time
 
 def clear_screen():
@@ -144,9 +145,13 @@ def description_lieu(map):
 
             else :
                 print("Vous rebroussez chemin.")
-        # elif lieu =="🐉" :
-        #     fight(boss,player)
-        #     Player.inventaire.add(searchItems(ladaronneaelias))
+        elif lieu =="🐉" :
+            print("Maelthar vous attaque !")
+            fight = Fight(Player, Boss)
+            Boss == "Maelthar"
+            fight.start()
+            
+            
         else : 
             time.sleep(3)
             
@@ -166,6 +171,6 @@ def boucle_jeu():
             deplacer_joueur(commande)
 
 
-def searchItems(item):
-    for item in items:
-        return item
+# def searchItems(item):
+#     for item in items:
+#         return item

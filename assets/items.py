@@ -1,12 +1,12 @@
-items = []
+# items = []
 
 
 
-class Item():
+# class Item():
     
 
 
 
 
-Ladaronneaelias = Item()
-items.append(Ladaronneaelias)
+# Ladaronneaelias = Item()
+# items.append(Ladaronneaelias)
