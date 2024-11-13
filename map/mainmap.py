@@ -96,8 +96,6 @@ def description_lieu(map):
         description = descriptionsT
     elif map == carte_murmure :
         description = descriptionsM
-    # elif map == carte_hurlements :
-    #     description = descriptionsH
     else :
         description = descriptions
         
@@ -133,12 +131,6 @@ def description_lieu(map):
                     carte_actuelle = carte_murmure
                     position_joueur = spawn_position
                     afficher_carte(carte_murmure)
-                
-                # elif lieu == "H" :
-                #       carte_actuelle = carte_hurlements
-                #       position_joueur = spawn_position
-                #       afficher_carte(carte_actuelle, carte_hurlements)
-
                 elif lieu == "M" :
                     carte_actuelle = carte_murmure
                     position_joueur = spawn_position
@@ -151,6 +143,10 @@ def description_lieu(map):
             fight(Mephisto,joueur)
             carte_actuelle[13][18] = " "
             carte_actuelle[5][22] = "🔑"
+            elif lieu == "🔑":
+                input("Appuyez sur une touche pour utilisé la clé!")
+            
+
             
              
 def boucle_jeu(name):
