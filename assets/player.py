@@ -7,7 +7,7 @@ class Player:
         self.name = name
         self.hp = 250
         self.inventory = inventaire
-        self.attaque = 5
+        self.attaque = 15
         self.defense = 10
 
     def is_alive(self):
@@ -16,11 +16,16 @@ class Player:
         return self.hp <= 0
     
     def attack(self):
-        rdm = random.randint(1,5)
+        point_attaque = 0 
+        for item in self.inventory.inventaire:
+            if item.type == "arme" :
+                point_attaque = item.attack()
+        
+        rdm = random.randint(3,5)
         if rdm == 1 :
-            point_attaque = self.attaque*2
+            point_attaque += self.attaque*2
         else :
-            point_attaque = self.attaque
+            point_attaque += self.attaque
         return point_attaque
 
     def __str__(self):
@@ -54,7 +59,7 @@ class Boss:
 
 Mephisto = Boss(
     name= "Mephisto, Le Faucher D'Ether",
-    hp=500,
+    hp=100,
     attaque=5,
     defense=10,
 )

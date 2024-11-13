@@ -58,7 +58,7 @@ def partie():
             input("Appuyez sur une touche pour continuer...")
             print(f"\033[92moh ... j'allais oublié , les monstres de ce sanctuaire on une grande faiblesse qui est le pouvoir de la Ronce.\033[0m")
             print("\033[92mCe pouvoir est si je me souviens bien dans le Jardin des Ruines , trouve ce jardin et empare toi de ce pouvoir sans cela tu mourrira à coup sur !!\033[0m")
-            choix = input("Choisissez une option : ")
+            choix = input("Appuyez sur une touche pour continuer : ")
             boucle_jeu(nom_joueur)
             break
         elif choix == '3':

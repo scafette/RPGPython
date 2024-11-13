@@ -149,10 +149,8 @@ def description_lieu(map):
         elif lieu =="☠️🪓" :
             print("Mephisto le Faucher D'Ether vous attaque !")
             fight(Mephisto,joueur)
-            
-            
-        else : 
-            time.sleep(3)
+            carte_actuelle[13][18] = " "
+            carte_actuelle[5][22] = "🔑"
             
              
 def boucle_jeu(name):
