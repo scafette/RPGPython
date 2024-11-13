@@ -1,6 +1,7 @@
 from map.mainmap import boucle_jeu
 from assets.player import Player
 from assets.inv import Inventaire
+
 import os
 import time
 
@@ -30,15 +31,12 @@ def menu():
 
 def partie():
     clear_screen()
-    nom_joueur = input("Bonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Si vous êtes parvenu jusqu'ici c'est que vous souhaitez libérer les ames maudites de ce sanctuaire. " 
-                    "Dites-moi quel est votre nom : ")
-    joueur = Player(
-        name=nom_joueur,
-        inventaire=Inventaire()
-        
-    )
-    print(f"\n\033[95mEnchanté, {joueur.name}, je me présente je suis Caîd, le garde de ce Sanctuaire personne ne peut entrer ni sortir sans que je sois au courant!\033[0m")
-    time.sleep(1)
+    print("\033[1mBonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Si vous êtes parvenu jusqu'ici c'est que vous souhaitez libérer les ames maudites de ce sanctuaire.\033[0m")
+    nom_joueur = input("\033[92mDites-moi quel est votre nom : \033[0m")
+
+
+    print(f"\n\033[92mEnchanté, {nom_joueur}, je me présente je suis Caîd, le garde de ce Sanctuaire personne ne peut entrer ni sortir sans que je sois au courant ! \033[0m")
+    input("Appuyez sur une touche pour continuer...")
 
     while True:
         clear_screen()
@@ -54,10 +52,14 @@ def partie():
                   "les vents hurlent en permanence, formant une barrière invisible qui repousse quiconque tente de s'approcher sans y être invité.\033[0m")
             input()
         elif choix == '2':
-            print(f"Bonne chance à vous, {joueur.name}, je vous souhaite toute la réussite et gloire afin de battre tout les horrible créature de ce sanctuaire ... Pitié ma Fille à été maudite et son âme est bloqué , je vous en supplie libérez la. "
-                " Que l'aventure commence !")
-            time.sleep(1)
-            boucle_jeu()
+            print(f"\033[95mBonne chance à vous, {nom_joueur}, je vous souhaite toute la réussite et gloire afin de battre toutes les horribles créatures de ce sanctuaire ..."
+                " Pitié, ma fille a été maudite et son âme est bloquée, je vous en supplie, libérez-la.\033[0m")
+            print("\033[91mQue l'aventure commence !\033[0m")
+            input("Appuyez sur une touche pour continuer...")
+            print(f"\033[92moh ... j'allais oublié , les monstres de ce sanctuaire on une grande faiblesse qui est le pouvoir de la Ronce.\033[0m")
+            print("\033[92mCe pouvoir est si je me souviens bien dans le Jardin des Ruines , trouve ce jardin et empare toi de ce pouvoir sans cela tu mourrira à coup sur !!\033[0m")
+            choix = input("Choisissez une option : ")
+            boucle_jeu(nom_joueur)
             break
         elif choix == '3':
             clear_screen()

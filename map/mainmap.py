@@ -6,8 +6,9 @@ from map.Jmap import carte_jardin, descriptionsJ
 from map.Pmap import carte_pont_suspendu, descriptionsP
 from map.Tmap import carte_titan, descriptionsT
 # from assets.items import items
-from assets.combat import Fight
-from assets.player import Boss, Player
+from assets.combat import fight
+from assets.player import Mephisto,Player
+from assets.inv import Inventaire
 import time
 
 def clear_screen():
@@ -145,20 +146,22 @@ def description_lieu(map):
 
             else :
                 print("Vous rebroussez chemin.")
-        elif lieu =="🐉" :
-            print("Maelthar vous attaque !")
-            fight = Fight(Player, Boss)
-            Boss == "Maelthar"
-            fight.start()
+        elif lieu =="☠️🪓" :
+            print("Mephisto le Faucher D'Ether vous attaque !")
+            fight(Mephisto,joueur)
             
             
         else : 
             time.sleep(3)
             
              
-def boucle_jeu():
-    global carte_actuelle
+def boucle_jeu(name):
+    global carte_actuelle, joueur
     carte_actuelle = carte
+    joueur = Player(
+        name=name,
+        inventaire=Inventaire()
+    )
 
     while True:
         afficher_carte(carte_actuelle)
