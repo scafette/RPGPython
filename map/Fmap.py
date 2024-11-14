@@ -22,7 +22,6 @@ carte_fosse_ombres = [
     ["🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑", "🌑"],
 ]
 
-
 descriptionsF = {
     "🌑": "\033[33mMuraille de la Fosse:\033[0m Une muraille de pierre sombre, couverte de mousse et de lichen, s'étend à perte de vue.\n"
             "Des ombres dansent sur les pierres, et l'air est lourd de magie ancienne.",
@@ -33,5 +32,3 @@ descriptionsF = {
     "☠️🪓": "\033[33m]Mephisto, Le Faucher D'Ether:\033[0m Vous vous tenez devant le Roi de la Fosse , derrère lui se trouve la porte de sortie.]",
     "🔑": "Utiliser la clé pour ????????????"
 }
-
-position_joueur = [2, 2]

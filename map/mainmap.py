@@ -7,7 +7,7 @@ from map.Pmap import carte_pont_suspendu, descriptionsP
 from map.Tmap import carte_titan, descriptionsT
 # from assets.items import items
 from assets.combat import fight
-from assets.player import Mephisto,Player
+from assets.player import Mephisto,Tharagon,Player
 from assets.inv import Inventaire
 import time
 
@@ -78,7 +78,9 @@ def deplacer_joueur(commande):
 
 def est_deplacement_valide(nouvelle_position):
     x, y = nouvelle_position
-    return 0 <= x < len(carte) and 0 <= y < len(carte[0]) and carte[x][y] != "#"
+    return 0 <= x < len(carte) and 0 <= y < len(carte[0]) and carte[x][y] 
+# != "#" and carte_jardin[x][y] != "🌿" and carte_titan[x][y] !="💥"
+
 
 def description_lieu(map):
     global carte_actuelle, position_joueur
@@ -142,13 +144,55 @@ def description_lieu(map):
             print("Mephisto le Faucher D'Ether vous attaque !")
             fight(Mephisto,joueur)
             carte_actuelle[13][18] = " "
-            carte_actuelle[5][22] = "🔑"
-            elif lieu == "🔑":
-                input("Appuyez sur une touche pour utilisé la clé!")
-            
-
-            
-             
+            carte_actuelle[5][21] = "🔑"
+        elif lieu == "🔑":
+                print("\033[32mutilisez la clé pour ???????????\033[0m")
+                input("\033[35mAppuyez sur une touche pour utiliser la clé\033[0m")
+                print("\033[31mLa Fosse est entrain de s'effondrez sortez vite !!!!!\033[0m")
+                time.sleep(3)
+                if lieu == "🔑":
+                    carte_actuelle = carte
+                    position_joueur = spawn_position
+                    afficher_carte(carte_actuelle)
+                    carte_actuelle[2][5] = " "
+                print("\033[32mVous avez réussi à sortir de la Fosse des Ombres vous revoila dans le sanctuaire.\033[0m")
+        elif lieu == "🌹" :
+            add = input("\033[31mVoulez-vous ajouter cette fleur à votre inventaire ? (oui/non) : \033[0m").lower()
+            if add == "oui":
+                joueur.inventory.add("Ronce")
+                joueur.inventory.add("Épée")
+                joueur.inventory.getitem("Épée").add_enchant(joueur.inventory.getitem("Ronce"))
+            else:
+                print("Vous continuez votre chemin.")
+        elif lieu == "🚪":
+            print("Vous avez trouvé une porte.")
+            ouvrir = input("Voulez-vous ouvrir la porte ? (oui/non) : ").lower()
+            if ouvrir == "oui":
+                print("Vous ouvrez la porte...")
+                input("Appuyez sur une touche pour continuer...")
+                carte_actuelle = carte
+                position_joueur = spawn_position
+                afficher_carte(carte_actuelle)
+                carte_actuelle[10][18] = " "
+        elif lieu == "🔱👹":
+            print("\033[31mTharagon le Roi des Titans vous attaque !\033[0m")
+            fight(Tharagon,joueur)
+            carte_actuelle[13][18] = " "
+            carte_actuelle[5][21] = "🔑"
+        elif lieu == "🔑":
+                print("\033[32mutilisez la clé pour ???????????\033[0m")
+                print("\033[34mutilisez la clé pour ???????????\033[0m")
+                input("\033[35mAppuyez sur une touche pour utiliser la clé\033[0m")
+                print("\033[31mLa Cour des Titan est entrain de s'effondrez sortez vite !!!!!\033[0m")
+                time.sleep(3)
+                if lieu == "🔑":
+                    carte_actuelle = carte
+                    position_joueur = spawn_position
+                    afficher_carte(carte_actuelle)
+                    carte_actuelle[12][2] = " "
+                print("\033[32mVous avez réussi à sortir de la Cours des Titans vous revoila dans le sanctuaire.\033[0m")
+                
+                
 def boucle_jeu(name):
     global carte_actuelle, joueur
     carte_actuelle = carte

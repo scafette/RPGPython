@@ -2,6 +2,7 @@ from map.mainmap import boucle_jeu
 from assets.player import Player
 from assets.inv import Inventaire
 
+
 import os
 import time
 
@@ -31,6 +32,7 @@ def menu():
 
 def partie():
     clear_screen()
+    #print(ascii_art4)
     print("\033[1mBonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Si vous êtes parvenu jusqu'ici c'est que vous souhaitez libérer les ames maudites de ce sanctuaire.\033[0m")
     nom_joueur = input("\033[92mDites-moi quel est votre nom : \033[0m")
 

@@ -9,3 +9,8 @@ class Inventaire() :
             if item.name == aim_item:
                 self.inventaire.append(item)
                 print(f"Vous avez ramassé {item.name}")
+
+    def getitem(self, aim_item):
+        for item in items:
+            if item.name == aim_item:
+                return item

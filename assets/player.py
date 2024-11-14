@@ -7,7 +7,7 @@ class Player:
         self.name = name
         self.hp = 250
         self.inventory = inventaire
-        self.attaque = 15
+        self.attaque = 5
         self.defense = 10
 
     def is_alive(self):
@@ -59,8 +59,13 @@ class Boss:
 
 Mephisto = Boss(
     name= "Mephisto, Le Faucher D'Ether",
-    hp=100,
-    attaque=5,
+    hp=500,
+    attaque=25,
     defense=10,
 )
-
+Tharagon = Boss(
+    name= "Tharagon",
+    hp=1000,
+    attaque=40,
+    defense=0,
+)

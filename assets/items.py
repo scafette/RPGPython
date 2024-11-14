@@ -21,6 +21,9 @@ class Arme(Item):
     def attack(self):
         return self.attaque + self.est_enchant()
 
+    def add_enchant(self, enchant):
+        self.enchantement.append(enchant)
+        print(f"Vous avez ajouté {enchant.name} à votre arme")
 
 
 class Enchant(Item):
@@ -31,7 +34,9 @@ class Enchant(Item):
 
 
 Cle = Item("Clé", "Referme le tombeau", "key")
-Ronce = Enchant("Ronce", 10)
+Ronce = Enchant("Ronce", 150)
 Epee = Arme("Épée", "Une épée en acier", "arme", 10)
 
 items = [Cle,Ronce,Epee]
+
+
