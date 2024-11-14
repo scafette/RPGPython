@@ -22,9 +22,9 @@ class Player:
                 point_attaque = item.attack()
         
         rdm = random.randint(3,5)
-        if rdm == 1 :
-            point_attaque += self.attaque*2
-        else :
+        if rdm == 3:
+            point_attaque += self.attaque *3
+        else:
             point_attaque += self.attaque
         return point_attaque
 
@@ -49,9 +49,9 @@ class Boss:
         return f"Nom: {self.name}, HP: {self.hp}"
     
     def attack(self):
-        rdm = random.randint(1,2)
+        rdm = random.randint(1,5)
         if rdm == 1 :
-            point_attaque = self.attaque*2
+            point_attaque = self.attaque*1.5
         else :
             point_attaque = self.attaque
         return point_attaque
@@ -60,24 +60,24 @@ class Boss:
 Mephisto = Boss(
     name= "Mephisto, Le Faucher D'Ether",
     hp=500,
-    attaque=25,
+    attaque=15,
     defense=10,
 )
 Tharagon = Boss(
     name= "Tharagon",
-    hp=1000,
-    attaque=40,
+    hp=700,
+    attaque=30,
     defense=0,
 )
 Silvarak = Boss(
     name= "Silvarak, Le Dragon du Sancturaire",
     hp=850,
-    attaque=50,
+    attaque=25,
     defense=15,
 )
 Sang_Igris = Boss(
     name= "Sang Igris",
-    hp=500,
+    hp=1500,
     attaque=70,
     defense=0,
 )

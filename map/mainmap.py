@@ -1,4 +1,3 @@
-import os
 from map.Fmap import carte_fosse_ombres, descriptionsF
 from map.Jmap import carte_jardin, descriptionsJ
 from map.Pmap import carte_pont_suspendu, descriptionsP
@@ -13,8 +12,9 @@ from assets.asccii import print_ascii, ascii_art_9_lines
 from assets.asccii import ascii_art_7_lines, print_ascii
 from assets.asccii import print_ascii, ascii_art_11
 from assets.asccii import print_ascii, ascii_art_8_lines
-import time
 
+import time
+import os
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -49,6 +49,11 @@ descriptions = {
 spawn_position = [2, 2]
 position_joueur = [2, 2]
 
+cles_obtenues = {
+    "cle_fosse": False,
+    "cle_titans": False,
+    "cle_pont": False,
+}
 def afficher_carte(map):
     clear_screen()
     for i, ligne in enumerate(map):
@@ -124,9 +129,13 @@ def description_lieu(map):
                     position_joueur = [4, 4]
                     afficher_carte(carte_titan)
                 elif lieu == "H":
-                    carte_actuelle = carte_hurlements
-                    position_joueur = [1, 1]
-                    afficher_carte(carte_hurlements)
+                    if all(cles_obtenues.values()):
+                        print("Vous avez toutes les clés ! Vous pouvez entrer dans la Tour des Hurlements.")
+                        carte_actuelle = carte_hurlements
+                        position_joueur = [1, 1]
+                        afficher_carte(carte_hurlements)
+                    else:
+                        print("Vous avez besoin de toutes les clés pour entrer dans la Tour des Hurlements.")
 
 
             else :
@@ -137,6 +146,7 @@ def description_lieu(map):
             fight(Mephisto,joueur)
             carte_actuelle[13][18] = " "
             carte_actuelle[5][21] = "🔑"
+            cles_obtenues["cle_fosse"] = True
         elif lieu == "🔑":
                 print("\033[32mutilisez la clé pour ???????????\033[0m")
                 input("\033[35mAppuyez sur une touche pour utiliser la clé\033[0m")
@@ -210,6 +220,7 @@ def description_lieu(map):
             fight(Tharagon,joueur)
             carte_actuelle[6][13] = " "
             carte_actuelle[9][13] = "🔒"
+            cles_obtenues["cle_titans"] = True
         elif lieu == "🔒":
                 print("\033[32mutilisez la clé pour ???????????\033[0m")
                 input("\033[35mAppuyez sur une touche pour utiliser la clé\033[0m")
@@ -227,6 +238,7 @@ def description_lieu(map):
             fight(Silvarak,joueur)
             carte_actuelle[10][13] = " "
             carte_actuelle[10][16] = "🗝️"
+            cles_obtenues["cle_pont"] = True
         elif lieu == "🗝️":
                 print("\033[32mutilisez la clé pour ???????????\033[0m")
                 input("\033[35mAppuyez sur une touche pour utiliser la clé\033[0m")
@@ -238,12 +250,13 @@ def description_lieu(map):
                     afficher_carte(carte_actuelle)
                     carte_actuelle[5][22] = " "
                 print("\033[32mVous avez réussi à sortir du Pont vous revoila dans le sanctuaire.\033[0m")
+                    
         elif lieu == "🤴🏻":
                 print(print_ascii(ascii_art_7_lines))
                 print("\033[31mSang Igris vous attaque !\033[0m")
                 fight(Sang_Igris,joueur)
                 print("\033[31mVous avez vaincu Sang Igris !\033[0m")
-                print("\033[31mVous avez libéré l'âme de Caïd !\033[0m")
+                print("\033[31mVous avez libéré les âmes de Caïd !\033[0m")
                 print("\033[31mVous avez gagné !\033[0m")
                 print("\033[31mMerci d'avoir joué !\033[0m")
                 exit()
@@ -265,8 +278,3 @@ def boucle_jeu(name):
             break
         else:
             deplacer_joueur(commande,carte_actuelle)
-
-
-# def searchItems(item):
-#     for item in items:
-#         return item

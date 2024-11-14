@@ -73,6 +73,5 @@ def partie():
         else:
             print("Choix invalide. Essayez encore.")
             time.sleep(1)
-
 if __name__ == "__main__":
     menu()
