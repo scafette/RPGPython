@@ -12,6 +12,8 @@ from assets.asccii import print_ascii, ascii_art_9_lines
 from assets.asccii import ascii_art_7_lines, print_ascii
 from assets.asccii import print_ascii, ascii_art_11
 from assets.asccii import print_ascii, ascii_art_8_lines
+from assets.asccii import print_ascii, ascii_art_1_lines
+
 
 import time
 import os
@@ -118,7 +120,7 @@ def description_lieu(map):
                     afficher_carte(carte_fosse_ombres)
                 elif lieu == "P":
                     carte_actuelle = carte_pont_suspendu
-                    position_joueur  = [1, 7]
+                    position_joueur  = [4, 3]
                     afficher_carte(carte_pont_suspendu)
                 elif lieu == "J":
                     carte_actuelle = carte_jardin
@@ -236,8 +238,8 @@ def description_lieu(map):
             print(print_ascii(ascii_art_9_lines))
             print("\033[31mSilvarak le Dragon vous attaque !\033[0m")
             fight(Silvarak,joueur)
-            carte_actuelle[10][13] = " "
-            carte_actuelle[10][16] = "🗝️"
+            carte_actuelle[8][13] = " "
+            carte_actuelle[8][10] = "🗝️"
             cles_obtenues["cle_pont"] = True
         elif lieu == "🗝️":
                 print("\033[32mutilisez la clé pour ???????????\033[0m")
@@ -255,6 +257,7 @@ def description_lieu(map):
                 print(print_ascii(ascii_art_7_lines))
                 print("\033[31mSang Igris vous attaque !\033[0m")
                 fight(Sang_Igris,joueur)
+                print(print_ascii(ascii_art_1_lines))
                 print("\033[31mVous avez vaincu Sang Igris !\033[0m")
                 print("\033[31mVous avez libéré les âmes de Caïd !\033[0m")
                 print("\033[31mVous avez gagné !\033[0m")

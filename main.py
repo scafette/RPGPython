@@ -7,6 +7,7 @@ from assets.asccii import ascii_art_4_lines, print_ascii
 import os
 import time
 
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
