@@ -37,14 +37,31 @@ class Enchant(Item):
         super().__init__(name, "Enchantement", "enchant")
         self.attaquebonus = attaquebonus
 
-Potion = Item("Potion", "Restaure 250 points de vie", "potion")
+
+
+class Potion(Item):
+    def __init__(self, name, description, type, hp):
+        super().__init__(name, description, type)
+        self.hp = hp
+        self.utilise = False
+
+    def use(self,player):
+        if self.utilise == False :
+            player.hp += self.hp
+            print("Vous avez utilisé une potion")
+            self.utilise = True
+        else : 
+            print("Potion vide")
+
+        
+
+
+potion = Potion("Potion", "Restaure 250 points de vie", "potion",250)
 Cle = Item("Clé", "Referme le tombeau", "key")
 Ronce = Enchant("Ronce", 150) 
 Epee = Arme("Épée", "Une épée en acier", "arme", 10)
 
 Epee.add_enchant(Ronce)
 
-items = [Cle, Ronce, Epee]
+items = [Cle, Ronce, Epee, potion]
 
-
-print(Epee.attack())

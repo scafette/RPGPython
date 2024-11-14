@@ -1,7 +1,8 @@
 from map.mainmap import boucle_jeu
 from assets.player import Player
 from assets.inv import Inventaire
-
+from assets.asccii import print_ascii, ascii_art_3_lines
+from assets.asccii import ascii_art_4_lines, print_ascii
 
 import os
 import time
@@ -12,6 +13,7 @@ def clear_screen():
 def menu():
     while True:
         clear_screen()
+        print(print_ascii(ascii_art_3_lines))
         print("MENU PRINCIPAL")
         print("1. Nouvelle Partie")
         print("2. À propos")
@@ -22,7 +24,7 @@ def menu():
             partie()
         elif choix == '2':
             print("\nRPG créé par Gio / Elias")
-            print("\033[95mDescription : Monstres,  Faucheurs d’Éther, Méphisto, Silvarak,\033[0m BOSS : Sang Igris.")
+            print("\033[95mDescription : Monstres: Tharagon, Méphisto, Silvarak,\033[0m BOSS : Sang Igris.")
             input("Appuyez sur une touche pour continuer...")
         elif choix == '3':
             print("Quitter le jeu...")
@@ -32,9 +34,9 @@ def menu():
 
 def partie():
     clear_screen()
-    #print(ascii_art4)
     print("\033[1mBonjour, jeune homme, vous devez être le chevalier envoyé d'Arcémus ! Si vous êtes parvenu jusqu'ici c'est que vous souhaitez libérer les ames maudites de ce sanctuaire.\033[0m")
     nom_joueur = input("\033[92mDites-moi quel est votre nom : \033[0m")
+    print(print_ascii(ascii_art_4_lines))
 
 
     print(f"\n\033[92mEnchanté, {nom_joueur}, je me présente je suis Caîd, le garde de ce Sanctuaire personne ne peut entrer ni sortir sans que je sois au courant ! \033[0m")
