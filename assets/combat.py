@@ -1,11 +1,15 @@
-
+from assets.player import Player
+from assets.inv import Inventaire
 
 def fight(boss,player):
     print(player)
     while player.is_alive() and boss.is_alive():
         print("\033[91mVous attaquez!\033[0m")
-        print("\033[92mAppuyez sur une touche pour attaquer!\033[0m")
-        input()
+        if input("\033[92mAppuyez sur une z pour attaquer!\033[0m") == "z":
+            player.attack()
+        if player.inventory.hasitem("Potion"):
+            if input("Appuyez sur une s pour utiliser une potion!\033[0m") == "s":
+                player.use_potion()
         boss.hp -= player.attack()
         print(f"\033[93m{boss.name} a {boss.hp} points de vie restants.\033[0m")
         if boss.is_dead():

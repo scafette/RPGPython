@@ -32,5 +32,4 @@ descriptionsP = {
     "🌉": "\033[33mVous êtes sur un pont suspendu, le vide est immense en dessous de vous.\033[0m",
 }
 
-position_joueur = [2, 2]
 

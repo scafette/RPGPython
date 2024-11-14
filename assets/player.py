@@ -27,6 +27,14 @@ class Player:
         else :
             point_attaque += self.attaque
         return point_attaque
+    
+    def use_potion(self):
+        for item in self.inventory.inventaire:
+            if item.type == "potion":
+                self.hp += 250
+                self.inventory.inventaire.remove(item)
+                print("Vous avez utilisé une potion")
+                break
 
     def __str__(self):
         return f"Nom: {self.name}, HP: {self.hp}, Inventaire: {self.inventory}"

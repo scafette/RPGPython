@@ -1,7 +1,5 @@
 import os
-from map.Cmap import carte_cristal, descriptionsC
 from map.Fmap import carte_fosse_ombres, descriptionsF
-from map.Mmap import carte_murmure, descriptionsM
 from map.Jmap import carte_jardin, descriptionsJ
 from map.Pmap import carte_pont_suspendu, descriptionsP
 from map.Tmap import carte_titan, descriptionsT
@@ -24,12 +22,12 @@ carte = [
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "P", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
-    ["#", " ", " ", " ", " ", " ", " ", " ", "M", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
+    ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "J", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", "T", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
-    ["#", " ", " ", " ", " ", " ", " ", " ", " ", "C", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
+    ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
     ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"]
 ]
@@ -38,10 +36,8 @@ descriptions = {
     "F": "\033[35mVous apercevez un panneau où il est écrit : 'La Fosse des Ombres'.\033[0m",
     "P": "\033[36mUn écriteau gravé dans le bois indique : 'Le Pont Suspendu'.\033[0m",
     "J": "\033[32mUn panneau de pierre recouvert de mousse signale : 'Le Jardin des Ruines'.\033[0m",  
-    "C": "\033[34mUn symbole lumineux est gravé dans la pierre, indiquant : 'La Chambre du Cristal'.\033[0m", 
     "T": "\033[33mVous trouvez une plaque dorée portant l'inscription : 'La Cour des Titans'.\033[0m",
     "H": "\033[31mUne ancienne stèle indique : 'La Tour des Hurlements'.\033[0m",
-    "M": "\033[31mUne ancienne stèle indique : 'Haul des Murmures'.\033[0m"
 }
 
 spawn_position = [2, 2]
@@ -59,7 +55,7 @@ def afficher_carte(map):
         print(ligne_affichee)
     print("\n")
 
-def deplacer_joueur(commande):
+def deplacer_joueur(commande, map):
     x, y = position_joueur
     nouvelle_position = [x, y]
     if commande == "z":
@@ -71,16 +67,14 @@ def deplacer_joueur(commande):
     elif commande == "d":
         nouvelle_position[1] += 1
 
-    if est_deplacement_valide(nouvelle_position):
+    if est_deplacement_valide(nouvelle_position, map):
         position_joueur[0], position_joueur[1] = nouvelle_position
     else:
         print("Déplacement impossible.")
 
-def est_deplacement_valide(nouvelle_position):
+def est_deplacement_valide(nouvelle_position, map):
     x, y = nouvelle_position
-    return 0 <= x < len(carte) and 0 <= y < len(carte[0]) and carte[x][y] 
-# != "#" and carte_jardin[x][y] != "🌿" and carte_titan[x][y] !="💥"
-
+    return 0 <= x < len(map) and 0 <= y < len(map[0]) and map[x][y] != "#" and map[x][y] != "🌿" and map[x][y] !="💥" and map[x][y] != "🌑"
 
 def description_lieu(map):
     global carte_actuelle, position_joueur
@@ -92,12 +86,8 @@ def description_lieu(map):
         description = descriptionsP
     elif map == carte_jardin :
         description = descriptionsJ
-    elif map == carte_cristal :
-        description = descriptionsC
     elif map == carte_titan :
         description = descriptionsT
-    elif map == carte_murmure :
-        description = descriptionsM
     else :
         description = descriptions
         
@@ -115,28 +105,18 @@ def description_lieu(map):
                     afficher_carte(carte_fosse_ombres)
                 elif lieu == "P":
                     carte_actuelle = carte_pont_suspendu
-                    position_joueur = spawn_position
+                    position_joueur  = [1, 7]
                     afficher_carte(carte_pont_suspendu)
                 elif lieu == "J":
                     carte_actuelle = carte_jardin
-                    position_joueur = spawn_position
+                    position_joueur = [3, 8]
                     afficher_carte(carte_jardin)
-                elif lieu == "C":
-                    carte_actuelle = carte_cristal
-                    position_joueur = spawn_position
-                    afficher_carte(carte_cristal)
+
                 elif lieu == "T":
                     carte_actuelle = carte_titan
-                    position_joueur = spawn_position
+                    position_joueur = [4, 4]
                     afficher_carte(carte_titan)
-                elif lieu == "M":
-                    carte_actuelle = carte_murmure
-                    position_joueur = spawn_position
-                    afficher_carte(carte_murmure)
-                elif lieu == "M" :
-                    carte_actuelle = carte_murmure
-                    position_joueur = spawn_position
-                    afficher_carte(carte_actuelle)
+
 
             else :
                 print("Vous rebroussez chemin.")
@@ -156,12 +136,25 @@ def description_lieu(map):
                     afficher_carte(carte_actuelle)
                     carte_actuelle[2][5] = " "
                 print("\033[32mVous avez réussi à sortir de la Fosse des Ombres vous revoila dans le sanctuaire.\033[0m")
+        elif lieu == "🗡️" :
+            add = input("\033[31mVoulez-vous ajouter cette épée à votre inventaire ? (oui/non) : \033[0m").lower()
+            if add == "oui":
+                joueur.inventory.add("Épée")
+            else:
+                print("Vous continuez votre chemin.")
+
         elif lieu == "🌹" :
             add = input("\033[31mVoulez-vous ajouter cette fleur à votre inventaire ? (oui/non) : \033[0m").lower()
             if add == "oui":
                 joueur.inventory.add("Ronce")
-                joueur.inventory.add("Épée")
+                
                 joueur.inventory.getitem("Épée").add_enchant(joueur.inventory.getitem("Ronce"))
+            else:
+                print("Vous continuez votre chemin.")
+        elif lieu =="🧪":
+            add = input("\033[31mVoulez-vous ajouter cette potion à votre inventaire ? (oui/non) : \033[0m").lower()
+            if add == "oui":
+                joueur.inventory.add("Potion")
             else:
                 print("Vous continuez votre chemin.")
         elif lieu == "🚪":
@@ -177,15 +170,15 @@ def description_lieu(map):
         elif lieu == "🔱👹":
             print("\033[31mTharagon le Roi des Titans vous attaque !\033[0m")
             fight(Tharagon,joueur)
-            carte_actuelle[13][18] = " "
-            carte_actuelle[5][21] = "🔑"
-        elif lieu == "🔑":
+            carte_actuelle[6][13] = " "
+            carte_actuelle[9][13] = "🔒"
+        elif lieu == "🔒":
                 print("\033[32mutilisez la clé pour ???????????\033[0m")
-                print("\033[34mutilisez la clé pour ???????????\033[0m")
+                
                 input("\033[35mAppuyez sur une touche pour utiliser la clé\033[0m")
                 print("\033[31mLa Cour des Titan est entrain de s'effondrez sortez vite !!!!!\033[0m")
                 time.sleep(3)
-                if lieu == "🔑":
+                if lieu == "🔒":
                     carte_actuelle = carte
                     position_joueur = spawn_position
                     afficher_carte(carte_actuelle)
@@ -209,7 +202,7 @@ def boucle_jeu(name):
             print("Quitter le jeu...")
             break
         else:
-            deplacer_joueur(commande)
+            deplacer_joueur(commande,carte_actuelle)
 
 
 # def searchItems(item):

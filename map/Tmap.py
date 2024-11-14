@@ -26,8 +26,7 @@ descriptionsT = {
     "🗿" :"Vous vous heurtez sur ce qui semble un énorme doigts de pied , vous levez les yeux et appercevez une statue immense",
     "🏛️":"Vous observez un temple qui semble être des maisons pour ces statues",
     "💥":"Vous êtes dans la cour des titans, vous entendez des bruits de pas énormes et des voix lointaines",
-    "🔱👹":"Vous sentez une présence maléfique , devant vous apparrait Tharagon le Roi de cette cour."
+    "🔱👹":"Vous sentez une présence maléfique , devant vous apparrait Tharagon le Roi de cette cour.",
+    "🔒": "\033[34mutilisez la clé pour ???????????\033[0m"
 }
-
-position_joueur = [2, 2]
 

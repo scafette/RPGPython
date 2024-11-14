@@ -22,7 +22,7 @@ def menu():
             partie()
         elif choix == '2':
             print("\nRPG créé par Gio / Elias")
-            print("\033[95mDescription : Monstres,  Faucheurs d’Éther, Géants du Typhon, Sœurs des Tempêtes, Maelthar,\033[0m BOSS : Sang Igris.")
+            print("\033[95mDescription : Monstres,  Faucheurs d’Éther, Méphisto, Silvarak,\033[0m BOSS : Sang Igris.")
             input("Appuyez sur une touche pour continuer...")
         elif choix == '3':
             print("Quitter le jeu...")
