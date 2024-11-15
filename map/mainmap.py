@@ -12,7 +12,7 @@ from assets.asccii import print_ascii, ascii_art_9_lines
 from assets.asccii import ascii_art_7_lines, print_ascii
 from assets.asccii import print_ascii, ascii_art_11
 from assets.asccii import print_ascii, ascii_art_8_lines
-from assets.asccii import print_ascii, ascii_art_1_lines
+from assets.asccii import print_ascii, ascii_art_7_lines
 
 
 import time
@@ -257,7 +257,7 @@ def description_lieu(map):
                 print(print_ascii(ascii_art_7_lines))
                 print("\033[31mSang Igris vous attaque !\033[0m")
                 fight(Sang_Igris,joueur)
-                print(print_ascii(ascii_art_1_lines))
+                print(print_ascii(ascii_art_7_lines))
                 print("\033[31mVous avez vaincu Sang Igris !\033[0m")
                 print("\033[31mVous avez libéré les âmes de Caïd !\033[0m")
                 print("\033[31mVous avez gagné !\033[0m")
